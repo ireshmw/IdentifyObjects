@@ -74,6 +74,7 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
                     }
                     if (){
 
+                        System.out.println();
 
                     }
                 }
