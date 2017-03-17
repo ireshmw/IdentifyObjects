@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IdentifyObjects</string>
+    <string name="title_activity_game_fce">GameFce</string>
+    <string name="title_activity_game_face">GameFace</string>
 </resources>

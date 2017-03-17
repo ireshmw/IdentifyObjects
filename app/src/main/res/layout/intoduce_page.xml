@@ -12,14 +12,8 @@
         android:layout_height="19dp"
         app:srcCompat="@drawable/footer"
         android:id="@+id/baseImg"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/replayBtn"
-        app:layout_constraintRight_toRightOf="@+id/motherBtn"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="@+id/replayBtn"
-        app:layout_constraintLeft_toRightOf="@+id/motherBtn" />
+        tools:layout_editor_absoluteY="201dp"
+        tools:layout_editor_absoluteX="95dp" />
 
     <ImageButton
         android:layout_width="46dp"
@@ -28,63 +22,36 @@
         android:id="@+id/fatherBtn"
         android:background="@drawable/father"
         android:scaleType="fitXY"
-        app:layout_constraintRight_toLeftOf="@+id/nextPageBtn"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/nextPageBtn"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintLeft_toLeftOf="@+id/nextPageBtn" />
+        tools:layout_editor_absoluteY="100dp"
+        tools:layout_editor_absoluteX="192dp" />
 
     <ImageButton
         android:layout_width="49dp"
-        android:layout_height="0dp"
+        android:layout_height="111dp"
         android:id="@+id/motherBtn"
         android:background="@drawable/mother"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/replayBtn"
-        app:layout_constraintRight_toRightOf="@+id/replayBtn"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="@+id/fatherBtn"
-        app:layout_constraintLeft_toRightOf="@+id/replayBtn" />
+        tools:layout_editor_absoluteY="100dp"
+        tools:layout_editor_absoluteX="144dp" />
 
     <ImageButton
         android:layout_width="33dp"
-        android:layout_height="0dp"
+        android:layout_height="89dp"
         app:srcCompat="@drawable/son"
         android:id="@+id/sonBtn"
         android:background="@drawable/son"
         android:scaleType="fitXY"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/baseImg"
-        app:layout_constraintRight_toRightOf="@+id/replayBtn"
-        android:layout_marginTop="21dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="@+id/replayBtn"
-        app:layout_constraintTop_toTopOf="@+id/motherBtn" />
+        tools:layout_editor_absoluteY="121dp"
+        tools:layout_editor_absoluteX="107dp" />
 
     <ImageButton
         android:layout_width="34dp"
-        android:layout_height="0dp"
+        android:layout_height="79dp"
         app:srcCompat="@drawable/daughter"
         android:id="@+id/daughterBtn"
         android:background="@drawable/daughter"
         android:scaleType="fitXY"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/baseImg"
-        app:layout_constraintRight_toRightOf="@+id/nextPageBtn"
-        android:layout_marginTop="10dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="@+id/nextPageBtn"
-        app:layout_constraintTop_toTopOf="@+id/sonBtn" />
+        tools:layout_editor_absoluteY="131dp"
+        tools:layout_editor_absoluteX="243dp" />
 
     <TextView
         android:text="Members of the Family"
@@ -103,13 +70,8 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textAlignment="center"
         android:textAllCaps="true"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/motherBtn"
-        android:layout_marginTop="32dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/motherBtn" />
+        tools:layout_editor_absoluteY="32dp"
+        tools:layout_editor_absoluteX="46dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,43 +79,30 @@
         android:id="@+id/memberText"
         android:textStyle="normal|bold"
         android:textSize="24sp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        tools:layout_editor_absoluteY="482dp"
+        tools:layout_editor_absoluteX="192dp" />
 
     <ImageButton
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:srcCompat="@android:drawable/ic_media_ff"
         android:id="@+id/nextPageBtn"
         android:elevation="2dp"
         android:adjustViewBounds="false"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/motherBtn"
-        android:layout_marginLeft="22dp" />
+        tools:layout_editor_absoluteY="230dp"
+        tools:layout_editor_absoluteX="227dp"
+        android:background="@color/colorAccent" />
 
     <ImageButton
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        app:srcCompat="@android:drawable/ic_menu_rotate"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@android:drawable/ic_media_play"
         android:id="@+id/replayBtn"
         android:elevation="2dp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="78dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="78dp" />
+        style="@android:style/Widget.Material.Light.ImageButton"
+        tools:layout_editor_absoluteY="230dp"
+        tools:layout_editor_absoluteX="110dp"
+        android:background="@color/colorAccent" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.mw.iresh.identifyobjects;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +68,14 @@ public class IntroducePage extends AppCompatActivity implements TextToSpeech.OnI
                 motherBtn.setVisibility(View.VISIBLE);
                 daughterBtn.setVisibility(View.VISIBLE);
                 sonBtn.setVisibility(View.VISIBLE);
+            }
+        });
+
+        nextPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gameFace = new Intent (IntroducePage.this, GameFace.class);
+                startActivity(gameFace);
             }
         });
 
