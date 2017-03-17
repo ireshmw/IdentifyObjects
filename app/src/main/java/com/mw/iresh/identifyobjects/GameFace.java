@@ -53,6 +53,7 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
         map.put("Son", sonBtn);
 
         btnMapLooper();
+        randomObjectGen();
 
     }
 
@@ -72,15 +73,17 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
                         randNum = rand.nextInt(4);
                         break;
                     }
-                    if (){
-
-                        System.out.println();
+                    if (i==objectCount.size()){
+                        state = true;
+                        objectCount.add(randNum);
 
                     }
                 }
 
             }
         }
+
+        System.out.println("object counts........."+objectCount);
     }
 
 
