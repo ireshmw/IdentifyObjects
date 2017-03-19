@@ -1,10 +1,9 @@
 package com.mw.iresh.identifyobjects;
 
 import android.animation.Animator;
-import android.content.Intent;
+import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageButton;
@@ -23,11 +22,10 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
     ImageView baseImg;
     TextView memberText;
     Map<String, ImageButton> map;
-    private TextToSpeech tts;
     boolean endingAnimations  = false;
     String[] member = {"Father","Mother","Daughter","Son"};
     ArrayList<Integer> objectCount = new ArrayList<>();
-
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,27 +58,30 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
 
     public void randomObjectGen(){
         Random rand = new Random();
-        int randNum = rand.nextInt(4);
+        int randNum = rand.nextInt(5);
         boolean state = false;
-        if (objectCount.size() ==0){
-            objectCount.add(randNum);
-        }
-        else {
+
+//        else {
 
             while (!state){
+                if (objectCount.size() == 0) {
+                    objectCount.add(randNum);
+                }
                 for (int i=0;i<objectCount.size();i++){
                     if (objectCount.get(i)== randNum) {
-                        randNum = rand.nextInt(4);
+                        randNum = rand.nextInt(5);
                         break;
                     }
-                    if (i==objectCount.size()){
-                        state = true;
+                    if (i + 1 == objectCount.size()) {
+                        if (objectCount.size() == 4) {
+                            state = true;
+                        }
                         objectCount.add(randNum);
 
                     }
                 }
 
-            }
+//            }
         }
 
         System.out.println("object counts........."+objectCount);
