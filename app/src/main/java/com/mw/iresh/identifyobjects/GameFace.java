@@ -50,18 +50,17 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
         map.put("Daughter", daughterBtn);
         map.put("Son", sonBtn);
 
+        randomObjectGen(4);
         btnMapLooper();
-        randomObjectGen();
+
 
     }
 
 
-    public void randomObjectGen(){
+    public void randomObjectGen(int numbersOfObjects){
         Random rand = new Random();
-        int randNum = rand.nextInt(5);
+        int randNum = rand.nextInt(4);
         boolean state = false;
-
-//        else {
 
             while (!state){
                 if (objectCount.size() == 0) {
@@ -69,11 +68,11 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
                 }
                 for (int i=0;i<objectCount.size();i++){
                     if (objectCount.get(i)== randNum) {
-                        randNum = rand.nextInt(5);
+                        randNum = rand.nextInt(4);
                         break;
                     }
-                    if (i + 1 == objectCount.size()) {
-                        if (objectCount.size() == 4) {
+                    if (i+1 == objectCount.size()) {
+                        if (objectCount.size() == numbersOfObjects-1) {
                             state = true;
                         }
                         objectCount.add(randNum);
@@ -81,8 +80,7 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
                     }
                 }
 
-//            }
-        }
+            }
 
         System.out.println("object counts........."+objectCount);
     }
@@ -90,17 +88,23 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
 
 
     public void btnMapLooper(){
-
-        int i = 1;
-        if (i<map.size()){
-
-            for (Map.Entry<String, ImageButton> entry : map.entrySet()) {
-                imageBtnAnimate(entry.getKey(), entry.getValue(), i);
-                System.out.println("btnmaperloop .........." + entry.getKey()+".........."+ entry.getValue());
-
-                i++;
-            }
-
+//
+//        int i = 1;
+//        if (i<map.size()){
+//
+//            for (Map.Entry<String, ImageButton> entry : map.entrySet()) {
+//                imageBtnAnimate(entry.getKey(), entry.getValue(), i);
+//                System.out.println("btnmaperloop .........." + entry.getKey()+".........."+ entry.getValue());
+//
+//                i++;
+//            }
+//
+//        }
+        int x=1;
+        for (int i:objectCount){
+            String key =  member[i];
+            imageBtnAnimate(key, map.get(key),x);
+            x++;
         }
     }
 
