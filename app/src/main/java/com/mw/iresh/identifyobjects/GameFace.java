@@ -1,14 +1,20 @@
 package com.mw.iresh.identifyobjects;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.mw.iresh.identifyobjects.customRecognitionListener.CustomRecognitionListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +33,12 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
     ArrayList<Integer> objectCount = new ArrayList<>();
     private TextToSpeech tts;
 
+    TextView spText;
+    Switch aSwitch;
+    SpeechRecognizer mySp;
+    CustomRecognitionListener recognitionListener;
+    Intent recognizeIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +50,20 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
         motherBtn = (ImageButton) findViewById(R.id.motherBtn);
         memberText = (TextView) findViewById(R.id.memberText);
         baseImg = (ImageView) findViewById(R.id.baseImg);
+
+
+        mySp = SpeechRecognizer.createSpeechRecognizer(this);
+        recognitionListener = new CustomRecognitionListener();
+        mySp.setRecognitionListener(recognitionListener);
+        recognizeIntent =new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        recognizeIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "en");
+        recognizeIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, this.getPackageName());
+        recognizeIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+        recognizeIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+
+        recognizeIntent.putExtra("android.speech.extra.DICTATION_MODE", true);
+        recognizeIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false);
+
 
 
 
@@ -103,7 +129,12 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
         int x=1;
         for (int i:objectCount){
             String key =  member[i];
-            imageBtnAnimate(key, map.get(key),x);
+            String nextKey="";
+            if (i!=member.length){
+                 nextKey = member[i];
+            }
+            //imageBtnAnimate(key, map.get(key),x);
+            objectAnimating(key, map.get(key),map.get(nextKey),x);
             x++;
         }
     }
@@ -123,6 +154,7 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
                 .setListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
+
 
                     }
 
@@ -158,6 +190,48 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
 
     }
 
+
+    public boolean objectAnimating(final String name, ImageButton currantObject, ImageButton netObject,int delay){
+        ViewPropertyAnimator animator = currantObject.animate();
+        animator.scaleX(1.7f).scaleY(1.7f).setDuration(2000).translationX(0).translationY(400).setStartDelay(delay*3000).withStartAction(new Runnable() {
+            @Override
+            public void run() {
+                //say("this is " + name);
+                say("who is this?");
+                //memberText.setText(name);
+            }
+        })
+                .setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mySp.startListening(recognizeIntent);
+                memberText.setText(recognitionListener.getReturnedText());
+                mySp.stopListening();
+                System.out.println("end of the animation...");
+                System.out.println("ending words....."+recognitionListener.getReturnedText());
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        return true;
+    }
+
     @Override
     public void onInit(int i) {
         say("Identify the family members!");
@@ -166,6 +240,14 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
     public void say(String text2say) {
         System.out.println("inside the say() ....name......" + text2say);
         tts.speak(text2say, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tts.shutdown();
+        mySp.destroy();
+        //Log.i(LOG_TAG, "destroy");
     }
 
 
