@@ -1,6 +1,7 @@
 package com.mw.iresh.identifyobjects;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -127,6 +128,8 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
 //
 //        }
         int x=1;
+        //String key =  member[1];
+        //ImageButton nextKey=map.get(key);
         for (int i:objectCount){
             String key =  member[i];
             String nextKey="";
@@ -137,6 +140,8 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
             objectAnimating(key, map.get(key),map.get(nextKey),x);
             x++;
         }
+
+        //objectAnimating(key, map.get(key),map.get(nextKey),x);
     }
 
 
@@ -191,46 +196,108 @@ public class GameFace extends AppCompatActivity implements TextToSpeech.OnInitLi
     }
 
 
-    public boolean objectAnimating(final String name, ImageButton currantObject, ImageButton netObject,int delay){
-        ViewPropertyAnimator animator = currantObject.animate();
-        animator.scaleX(1.7f).scaleY(1.7f).setDuration(2000).translationX(0).translationY(400).setStartDelay(delay*3000).withStartAction(new Runnable() {
-            @Override
-            public void run() {
-                //say("this is " + name);
-                say("who is this?");
-                //memberText.setText(name);
-            }
-        })
-                .setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
+    public boolean objectAnimating(final String name, final ImageButton currantObject, ImageButton netObject, int delay){
+
+        final ViewPropertyAnimator animator = currantObject.animate();
+        //say("who is this?");
+        animator.scaleX(1.7f).scaleY(1.7f).setDuration(2000).translationX(0).translationY(400).setStartDelay(delay*3000)
+//        .setListener(new Animator.AnimatorListener() {
+//            @Override
+//            public void onAnimationStart(Animator animation) {
+//                System.out.println("starting the recornizer ......");
+//                mySp.startListening(recognizeIntent);
+//
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+////                tts.stop();
+////                boolean speakingState =tts.isSpeaking();
+//////                if (!speakingState){
+//////
+//////                }
+////
+////                    mySp.startListening(recognizeIntent);
+////                    memberText.setText(recognitionListener.getReturnedText());
+////                    System.out.println("end of the animation...");
+////                    System.out.println("ending words....."+recognitionListener.getReturnedText());
+////                    mySp.stopListening();
+//
+//
+////                mySp.startListening(recognizeIntent);
+//
+//                System.out.println("end of the animation...");
+//                System.out.println("ending words....."+recognitionListener.getReturnedText());
+//
+//                memberText.setText(recognitionListener.getReturnedText());
+//                System.out.println("before calling the cancel method.....");
+//
+//                System.out.println("after calling the inside the cancel method.....");
+//
+//                mySp.stopListening();
+//
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onAnimationCancel(Animator animation) {
+//                System.out.println("inside the cancel method.....");
+////                mySp.stopListening();
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animator animation) {
+//
+//            }
+//        }).setListener(new AnimatorListenerAdapter() {
+//        })
+            .setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    super.onAnimationCancel(animation);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+
+                    mySp.startListening(recognizeIntent);
+                    memberText.setText(recognitionListener.getReturnedText());
+                    System.out.println("end of the animation...");
+                    System.out.println("ending words....."+recognitionListener.getReturnedText());
+                    mySp.stopListening();
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+                    super.onAnimationRepeat(animation);
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                }
+
+                @Override
+                public void onAnimationPause(Animator animation) {
+                    super.onAnimationPause(animation);
+                }
+
+                @Override
+                public void onAnimationResume(Animator animation) {
+                    super.onAnimationResume(animation);
+                }
+            });
 
 
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mySp.startListening(recognizeIntent);
-                memberText.setText(recognitionListener.getReturnedText());
-                mySp.stopListening();
-                System.out.println("end of the animation...");
-                System.out.println("ending words....."+recognitionListener.getReturnedText());
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
 
         return true;
     }
+
+
 
     @Override
     public void onInit(int i) {

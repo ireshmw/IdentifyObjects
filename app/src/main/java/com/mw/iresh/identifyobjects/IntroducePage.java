@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class IntroducePage extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
     ImageButton fatherBtn, motherBtn, daughterBtn, sonBtn, nextPageBtn,replayBtn;
+    Button skipBtn;
     ImageView baseImg;
     TextView memberText;
     Map<String, ImageButton> map;
@@ -39,6 +41,7 @@ public class IntroducePage extends AppCompatActivity implements TextToSpeech.OnI
         nextPageBtn = (ImageButton) findViewById(R.id.nextPageBtn);
         replayBtn = (ImageButton) findViewById(R.id.replayBtn);
         baseImg = (ImageView) findViewById(R.id.baseImg);
+        skipBtn = (Button) findViewById(R.id.skipBtn);
         replayBtn.setVisibility(View.INVISIBLE);
         nextPageBtn.setVisibility(View.INVISIBLE);
 
@@ -72,6 +75,14 @@ public class IntroducePage extends AppCompatActivity implements TextToSpeech.OnI
         });
 
         nextPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gameFace = new Intent (IntroducePage.this, GameFace.class);
+                startActivity(gameFace);
+            }
+        });
+
+        skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gameFace = new Intent (IntroducePage.this, GameFace.class);
